@@ -8,7 +8,7 @@ const theme = extendTheme({
         dark: "#36313D",
         light: "#e8e8e8"
     },
-    fonts: ["sans-serif", "Roboto"],
+    fonts: ["Segoe UI", "Tahoma", "sans-serif"],
     fontSizes: {
         small: "1em",
         medium: "2em",

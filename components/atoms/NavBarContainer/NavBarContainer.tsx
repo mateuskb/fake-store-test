@@ -1,5 +1,5 @@
 import { Flex, useColorModeValue } from "@chakra-ui/react"
-import { IField } from "../../interfaces/geral"
+import { IField } from "../../../interfaces/geral"
 
 const NavBarContainer = ({ children , ...extraStyles }: IField) => {
     return (

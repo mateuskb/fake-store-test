@@ -1,12 +1,10 @@
 import type { NextPage } from 'next'
-import FooterLink from '../components/atoms/FooterLink'
+import ListProducts from '../components/organisms/ListProducts/ListProducts'
 
 const Home: NextPage = () => {
   return (
     <div>
-      <footer >
-        <FooterLink name={'Mateus Ribeiro'} />
-      </footer>
+      <ListProducts/>
     </div>
   )
 }
