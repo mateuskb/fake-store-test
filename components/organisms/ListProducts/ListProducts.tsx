@@ -8,23 +8,24 @@ const ListProducts = () => {
     
     const [isLoading, toggleIsLoading] = useState<Boolean>(false);
     const [Products, setProducts] = useState<Product[]>([]);
-    const handleGetStatus = useCallback(async (query?: string) => {
-      try {
-        toggleIsLoading(true);
-  
-        const response = await fetchProducts();
-  
-        toggleIsLoading(false);
-  
-        setProducts(response.data);
-      } catch (error) {
-        toggleIsLoading(false);
-      }
-    }, []);
   
     useEffect(() => {
-      handleGetStatus();
+      handleGetProducts();
     }, []);
+
+    const handleGetProducts = useCallback(async (query?: string) => {
+        try {
+          toggleIsLoading(true);
+    
+          const response = await fetchProducts();
+    
+          toggleIsLoading(false);
+    
+          setProducts(response.data);
+        } catch (error) {
+          toggleIsLoading(false);
+        }
+      }, []);
 
     return (
         <Flex>
