@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
-import ListProducts from '../components/organisms/ListProducts/ListProducts'
 import { Container } from '@chakra-ui/react'
+import ListCart from '../components/organisms/ListCart/ListCart'
 
 const Home: NextPage = () => {
   return (
     <Container maxW='container.lg' size="lg">
-      <ListProducts/>
+      <ListCart/>
     </Container >
   )
 }

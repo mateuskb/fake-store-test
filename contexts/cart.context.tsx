@@ -1,21 +1,14 @@
 import Product from '../interfaces/product';
-import { createContext, useContext, ReactNode, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { IField } from '../interfaces/geral';
+import { CartContextType, CartListItem } from '../interfaces/cart';
 
-type CartListItem = {
-  product: Product;
-  quantity: number;
-};
-
-type CartContextType = {
-    cart: CartListItem[];
-    addProductToCart: (item: CartListItem) => void;
-    removeProductFromCart: (item: Product) => void;
-};
   
 const defaultContext: CartContextType = {
     cart: [],
     addProductToCart: () => {},
+    subtractProductToCart: () => {},
+    getQuantity: () => '',
     removeProductFromCart: () => {}
 };
 
@@ -50,8 +43,30 @@ export function CartProvider({ children }: IField) {
             return p;
           });
           setCart(newState);
+        } else {
+          setCart([...cart, item]);
         }
-        setCart([...cart, item]);
+    };
+
+    const subtractProductToCart = (item: CartListItem) => {
+        const existingProduct = getProductById(item.product.id);
+        let newState: CartListItem[] = [];
+        if (existingProduct) {
+          newState = cart.map((p) => {
+            if (p.product.id === existingProduct.product.id) {
+              if(p.quantity > 1) {
+                return {
+                  product: p.product,
+                  quantity: p.quantity - item.quantity
+                };
+              } else {
+                removeProductFromCart(p.product);
+              }
+            }
+            return p;
+          });
+          setCart(newState);
+        } 
     };
 
     const removeProductFromCart = (item: Product) => {
@@ -60,9 +75,22 @@ export function CartProvider({ children }: IField) {
           setCart(newProducts);
     };
 
+    const getQuantity = (id: string): string => {
+      const existingProduct = getProductById(id);
+      if (existingProduct) {
+        return existingProduct.quantity.toString();
+      } else {
+        return '0';
+      }
+       
+  };
+    
+
     const value = {
         cart,
         addProductToCart,
+        getQuantity,
+        subtractProductToCart,
         removeProductFromCart,
     };
 
