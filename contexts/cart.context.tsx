@@ -51,6 +51,7 @@ export function CartProvider({ children }: IField) {
     const subtractProductToCart = (item: CartListItem) => {
         const existingProduct = getProductById(item.product.id);
         let newState: CartListItem[] = [];
+        let removeFromCart: Boolean = false;
         if (existingProduct) {
           newState = cart.map((p) => {
             if (p.product.id === existingProduct.product.id) {
@@ -60,19 +61,25 @@ export function CartProvider({ children }: IField) {
                   quantity: p.quantity - item.quantity
                 };
               } else {
-                removeProductFromCart(p.product);
+                removeFromCart = true;
               }
             }
             return p;
           });
-          setCart(newState);
+          if(removeFromCart){
+            removeProductFromCart(item.product);
+          } else {
+            setCart(newState);
+          }
         } 
     };
 
     const removeProductFromCart = (item: Product) => {
         const newProducts = cart.filter((p) => p.product.id !== item.id);
 
-          setCart(newProducts);
+        console.log(newProducts);
+
+        setCart(newProducts);
     };
 
     const getQuantity = (id: string): string => {

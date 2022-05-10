@@ -10,6 +10,7 @@ const ListCart = () => {
     const { cart,  addProductToCart, getQuantity, subtractProductToCart } = useCart();
     const router = useRouter()
 
+    console.log(cart);
     return (
         <Flex>
             {(cart.length > 0 ) ?

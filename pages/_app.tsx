@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { ChakraProvider } from '@chakra-ui/react'
+import { Box, ChakraProvider } from '@chakra-ui/react'
 import NavBar from '../components/molecules/NavBar/NavBar';
 import theme from '../styles/theme';
 import { CartProvider } from '../contexts/cart.context';
@@ -12,7 +12,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ChakraProvider theme={theme}>
       <CartProvider>
         <NavBar></NavBar>
-        <Component {...pageProps} />
+        <Box marginBottom='100px'>
+          <Component {...pageProps} />
+        </Box>
         <Footer/>
       </CartProvider>
     </ChakraProvider>
